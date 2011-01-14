@@ -1,5 +1,24 @@
 <% content_for :head do %>
-  <%= javascript_include_tag 'nicEdit', 'nicEditConfig' %>
+  <%= javascript_include_tag 'wymeditor/jquery.wymeditor.js' %>
+
+  <script type="text/javascript" charset="utf-8">
+    var $j = jQuery.noConflict();
+    $j(function() {
+        $j('.wymeditor').wymeditor({
+          htmlParser: 'xhtml_parser.js',
+          cssParser:   'wym_css_parser.js',
+          containersItems: [
+          {'name': 'P', 'title': 'Paragraph', 'css': 'wym_containers_p'},
+          {'name': 'H1', 'title': 'Heading_1', 'css': 'wym_containers_h1'},
+          {'name': 'H2', 'title': 'Heading_2', 'css': 'wym_containers_h2'},
+          {'name': 'H3', 'title': 'Heading_3', 'css': 'wym_containers_h3'},
+          {'name': 'PRE', 'title': 'Preformatted', 'css': 'wym_containers_pre'},
+          {'name': 'BLOCKQUOTE', 'title': 'Blockquote', 'css': 'wym_containers_blockquote'},
+          ],
+          lang: '<%= I18n.locale.to_s.split("-").first %>'
+        });
+      });
+  </script>
   <%= stylesheet_link_tag 'blog' %>
 <% end %>
 
@@ -10,26 +29,26 @@
 <% end %>
 
 <p>
-  <%= form.label :title %> <span class="required">*</span><br />
-  <%= form.text_field :title %>
-  <%= form.error_message_on :title %>
+<%= form.label :title %> <span class="required">*</span><br />
+<%= form.text_field :title %>
+<%= form.error_message_on :title %>
 </p>
 
 <p>
-	<%= form.fields_for :blog_entry_image do |blog_entry_image_fields| %>
-		<%= blog_entry_image_fields.label :attachment, t(:blogs_main_image) %><br/>
-		<%= blog_entry_image_fields.file_field :attachment %>
-	<% end %>
+<%= form.fields_for :blog_entry_image do |blog_entry_image_fields| %>
+  <%= blog_entry_image_fields.label :attachment, t(:blogs_main_image) %><br/>
+  <%= blog_entry_image_fields.file_field :attachment %>
+<% end %>
 </p>
 
 <p>
 <%= form.label :body %><br />
-  <%= form.text_area :body, :id => 'blog_entry_body', :style => 'width: 700px' %>
-  <%= form.error_message_on :body %>
+<%= form.text_area :body, :id => 'blog_entry_body', :style => 'width: 700px', :class => 'wymeditor' %>
+<%= form.error_message_on :body %>
 </p>
 
 <p>
-  <%= form.label :tag_list, 'Tag List' %><br />
-  <%= form.text_field :tag_list %>
-  <%= t('tag_list_example') %>
+<%= form.label :tag_list, 'Tag List' %><br />
+<%= form.text_field :tag_list %>
+<%= t('tag_list_example') %>
 </p>
