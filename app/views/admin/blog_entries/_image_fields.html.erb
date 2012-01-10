@@ -5,7 +5,6 @@
             </div>
 			<script type="text/javascript" charset="utf-8">
 				$('#blog_image_<%= f.object.id %> img').click(function(){
-					//console.log(this);
 					$('#blog_entry_body').insertAtCaret("!"+this.src+"!");
 				});
 			</script>

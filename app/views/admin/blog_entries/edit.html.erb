@@ -28,7 +28,7 @@
 
 <h1><%= t :editing_blog_entry %></h1>
 
-<% form_for([:admin, @blog_entry], :html => { :multipart => true }) do |f| %>
-  <%= render :partial => f %>
-  <%= render :partial => 'admin/shared/edit_resource_links' %>
+<%= form_for([:admin, @blog_entry], :html => { :multipart => true }) do |f| %>
+    <%= render :partial => 'form', :locals => { :form => f } %>
+    <%= render :partial => 'admin/shared/edit_resource_links' %>
 <% end %>
