@@ -5,12 +5,17 @@ module SpreeBloggingSpree
 
       desc "Configures your Rails application for use with BloggingSpree"
 
-      def copy_migrations
-        directory "db"
+      def add_migrations
+        run 'bundle exec rake railties:install:migrations FROM=spree_blogging_spree'
       end
 
-      def copy_public
-        directory "public"
+      def run_migrations
+          res = ask "Would you like to run the migrations now? [Y/n]"
+          if res == "" || res.downcase == "y"
+              run 'bundle exec rake db:migrate'
+          else
+              puts "Skipping rake db:migrate, don't forget to run it!"
+          end
       end
 
     end
