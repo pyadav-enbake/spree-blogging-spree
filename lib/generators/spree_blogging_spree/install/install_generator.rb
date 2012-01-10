@@ -4,7 +4,6 @@ module SpreeBloggingSpree
 
       def add_javascripts
         append_file "app/assets/javascripts/store/all.js", "//= require store/spree_blogging_spree\n"
-        append_file "app/assets/javascripts/admin/all.js", "//= require admin/spree_blogging_spree\n"
       end
 
       def add_stylesheets
