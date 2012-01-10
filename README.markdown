@@ -28,7 +28,7 @@ Compatibility
 Dependencies
 ------------
 
-* is_taggable (requires a forked version for Rails 3 compatibility)
+* is_taggable_rails3 (requires a forked version of is_taggable because of named_scope issues)
 * jQuery
 * nicEdit *(included)*
 
