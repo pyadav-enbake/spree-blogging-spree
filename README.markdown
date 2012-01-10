@@ -7,7 +7,7 @@ It also adds the ability to have multiple images per blog post.
 
 Originally forked from [paulcc/spree-blog](http://github.com/paulcc/spree-blog/), this extension intends to offer a more complete blogging solution for use within the Spree E-Commerce application. It currently consists of a blog, news archive, and a news archive widget written in jQuery.
 
-See the [issue tracker](http://github.com/sbeam/spree-blogging-spree/issues) for future plans.
+See the [issue tracker](http://github.com/jaymendoza/spree-blogging-spree/issues) for future plans.
 
 
 Installation
