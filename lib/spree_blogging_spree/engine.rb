@@ -18,7 +18,7 @@ module SpreeBloggingSpree
         Rails.application.config.cache_classes ? require(c) : load(c)
       end
 
-      Ability.register_ability(SpreeBloggingSpreeAbility)
+      Spree::Ability.register_ability(SpreeBloggingSpreeAbility)
     end
 
     config.to_prepare &method(:activate).to_proc
