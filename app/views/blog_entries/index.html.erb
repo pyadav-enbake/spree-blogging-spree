@@ -3,9 +3,9 @@
   <% if !@blog_entries.empty? %>
 
     <ul id="blog-entries">
-      <% @blog_entries.each do |e| %>
+      <% @blog_entries.each do |blog_entry| %>
         <li class="blog_entry">
-          <%= render :partial => 'blog', :locals => {:e => e} %>
+          <%= render :partial => 'blog', :object => blog_entry %>
         </li>
       <% end %>
     </ul>
@@ -20,7 +20,7 @@
 
   <% content_for :sidebar do %>
     <div id="blog-sidebar">
-      <%= render :partial => 'news_archive', :object => @archives %>
+      <%= render :partial => 'news_archive', :object => @news_archive %>
     </div>
   <% end %>
 

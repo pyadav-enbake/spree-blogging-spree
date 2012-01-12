@@ -1,16 +1,7 @@
-<% unless @latest.blank? %>
-    <h5><%= t(:recent_news) %></h5>
-    <ul class="newsnav">
-        <% @latest.each do |news| %>
-            <li><%= link_to news.title, entry_permalink(news) %> <br />
-            <small><%= I18n.l(news.created_at, :format => "%B %d %Y") %></small></li>
-        <% end %>
-    </ul>
-<% end %>
-<% unless @archives.blank? %>
+<% unless news_archive.blank? %>
     <h5><%= t(:news_archive) %></h5>
         <ul id="news-archive">
-        <% @archives.to_a.reverse.each do |year, months_with_entries| %>
+        <% news_archive.to_a.reverse.each do |year, months_with_entries| %>
           <% d = Date.parse("1/#{year}") %>
 
           <li><h6><%= year %></h6>

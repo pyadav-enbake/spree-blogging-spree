@@ -1,27 +1,27 @@
-<h2><%= link_to e.title, entry_permalink(e) %></h2>
+<h2><%= link_to blog.title, entry_permalink(blog) %></h2>
 
 <div class="date">
-  <%= l( e.created_at.to_date, :format => :long) %>
+  <%= l( blog.created_at.to_date, :format => :long) %>
 </div>
 
-<div class="body">
-    <% if e.images.length == 1 %>
-      <%= link_to(image_tag(e.images.first.attachment.url(:normal)), e.images.first.attachment.url(:large), :class=>'blog_image') %>
-    <% end %>
+<div data-hook="spree_blogging_spree_blog_body" class="body">
+  <% if blog.images.length == 1 %>
+    <%= link_to(image_tag(blog.images.first.attachment.url(:normal)), blog.images.first.attachment.url(:large), :class=>'blog_image') %>
+  <% end %>
 
-  <%= raw RedCloth.new(e.body).to_html %>
+  <%= raw blog.body %>
 
-  <% if e.images.length > 1 %>
-      <div class="images">
-          <% e.images.each do |image| %>
-              <%#= link_to(image_tag(image.attachment.url(:normal)), image.attachment.url(:large)) %>
-          <% end %>
-      </div>
-   <% end %>
+  <% if blog.images.length > 1 %>
+    <div class="images">
+      <% blog.images.each do |image| %>
+        <%= link_to(image_tag(image.attachment.url(:normal)), image.attachment.url(:large)) %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
-<% unless e.tag_list.empty? %>
-  <%= render :partial => 'tag_list', :locals => {:e => e}  %>
+<% unless blog.tag_list.empty? %>
+  <%= render :partial => 'tag_list', :locals => {:blog_entry => blog}  %>
 <% end %>
 
 <br class="clear" />
