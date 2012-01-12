@@ -2,7 +2,7 @@ Spree::Core::Engine.routes.append do
   resources :news, :controller => :blog_entries
 
   namespace :admin do
-    resources :blog_entries
+    resources :blog, :controller => :blog_entries
   end
 
   match 'news/:year/:month/:day/:slug', :to => 'blog_entries#show', :as => :entry_permalink
