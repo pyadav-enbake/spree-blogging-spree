@@ -4,16 +4,16 @@ class BlogEntriesController < Spree::BaseController
 
   def show
     unless @blog_entry = BlogEntry.find_by_permalink(params[:slug])
-        render :file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404
+        raise ActiveRecord::RecordNotFound
     end
   end
 
   def index
-    @blog_entries = BlogEntry.published.paginate(pagination_options(params))
+    @blog_entries = BlogEntry.published
   end
 
   def tag
-    @blog_entries = BlogEntry.by_tag(params[:tag]).paginate(pagination_options(params))
+    @blog_entries = BlogEntry.by_tag(params[:tag])
     render 'index'
   end
 
@@ -25,17 +25,7 @@ class BlogEntriesController < Spree::BaseController
   private
 
   def load_news_archive_data
-      unless Spree::Config[:blog_entries_recent_sidebar].blank?
-          @latest = BlogEntry.latest(Spree::Config[:blog_entries_recent_sidebar])
-          @archives = BlogEntry.organize_archives(@latest.to_a.last.created_at) unless @latest.blank?
-      else
-          @archives = BlogEntry.organize_archives
-      end
-  end
-
-  def pagination_options(params)
-    @pagination_options ||= {:per_page  => Spree::Config[:blog_entries_per_page],
-                             :page      => params[:page]}
+    @news_archive = BlogEntry.organize_archives
   end
 
 end

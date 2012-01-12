@@ -53,7 +53,6 @@ class BlogEntry < ActiveRecord::Base
   end
 
   def self.organize_archives(before=nil)
-    before ||= Date.now
     Hash.new.tap do |entries|
       years.each do |year|
         months_for(year, before).each do |month|
@@ -70,6 +69,7 @@ class BlogEntry < ActiveRecord::Base
   end
 
   def self.months_for(year, before)
+    before ||= Time.now
     all.select {|e| e.created_at.year == year && e.created_at < before }.map {|e| e.created_at.month }.uniq
   end
 
