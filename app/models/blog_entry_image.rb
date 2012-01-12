@@ -1,4 +1,4 @@
-class BlogEntryImage < Image
+class BlogEntryImage < Spree::Image
   belongs_to :entry, :class_name => "BlogEntry"
   has_attached_file :attachment, 
     :styles => {:mini => '48x48#', :normal => '200x200>', :large => '600x600>'},
