@@ -4,11 +4,8 @@ class Spree::Admin::BlogEntriesController < Spree::Admin::ResourceController
   #   @blog_entry.images.build
   # end
 
-  update.after :expire_cache
-
-  private
-  def expire_cache
-    expire_page :controller => '/news', :action => 'show', :path => @object.slug
+  def index
+    @blog_entries = Spree::BlogEntry.all
   end
 
 end

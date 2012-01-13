@@ -1,6 +1,6 @@
 require "is_taggable"
 
-class BlogEntry < ActiveRecord::Base
+class Spree::BlogEntry < ActiveRecord::Base
   
   def initialize(attributes={})
     date_hack(attributes, "created_at") unless attributes.nil?
@@ -24,10 +24,10 @@ class BlogEntry < ActiveRecord::Base
   validates_presence_of :title
 
   default_scope order("created_at DESC")
-  scope :published, lambda { where("blog_entries.created_at <= ?", Time.zone.now) }
+  scope :published, lambda { where("spree_blog_entries.created_at <= ?", Time.zone.now) }
   scope :latest, lambda { |n| published.limit(n.to_i) }
 
-  has_many :images, :as => :viewable, :dependent => :destroy, :class_name => "BlogEntryImage"
+  has_many :images, :as => :viewable, :dependent => :destroy, :class_name => "Spree::BlogEntryImage"
 
   accepts_nested_attributes_for :images, :reject_if => lambda { |a| a[:attachment].blank? && a[:_destroy] != "1" }, :allow_destroy => true
  
@@ -43,7 +43,7 @@ class BlogEntry < ActiveRecord::Base
   end 
 
   def self.by_tag(name)
-    find(:all, :select => 'DISTINCT blog_entries.*', :joins => [:taggings, :tags], :conditions => {'tags.name' => name })
+    find(:all, :select => 'DISTINCT spree_blog_entries.*', :joins => [:taggings, :tags], :conditions => {'tags.name' => name })
   end
 
   private
@@ -58,7 +58,7 @@ class BlogEntry < ActiveRecord::Base
         months_for(year, before).each do |month|
           date = Date.new(year, month)
           entries[year] ||= []
-          entries[year] << [date.strftime("%B"), BlogEntry.by_date(date, :month)]
+          entries[year] << [date.strftime("%B"), self.by_date(date, :month)]
         end
       end
     end
@@ -75,11 +75,6 @@ class BlogEntry < ActiveRecord::Base
 
   def create_permalink
     self.permalink = title.to_url
-  end
-
-  def validate
-    # nicEdit field contains "<br>" when blank
-    errors.add(:body, "can't be blank") if body =~ /^<br>$/
   end
 
 end
