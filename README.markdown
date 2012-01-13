@@ -1,6 +1,6 @@
-This fork updates extension to work with Spree 0.70 and Rails 3.1. 
+This fork updates extension to work with Spree 1.0 and Rails 3.2. 
 
-It also adds the ability to have multiple images per blog post. 
+It also adds the ability to have multiple images per blog post.
 
 [BloggingSpree](http://github.com/sbeam/spree-blogging-spree/)
 ---------------
@@ -23,19 +23,18 @@ Run:
 Compatibility
 -------------
 
-* Spree 0.70+
+* Spree 1.0-beta+
 
 Dependencies
 ------------
 
 * is_taggable_rails3 (requires a forked version of is_taggable because of named_scope issues)
-* jQuery
 
 Note about Rich Text Editors
 ----------------------------
-Seems to be a lot of disagreement about which Rich Text Editor to include, if any. No need to fork just to include your favorite. Thanks to Deface, if you want TinyMCE for instance, just unroll the package in `/app/assets/javascripts/admin` and add an override like
+Seems to be a lot of disagreement about which Rich Text Editor to include, if any. No need to fork just to include your favorite. Thanks to Deface, if you want TinyMCE for instance, just unroll the package in `/app/assets/javascripts/admin` and add an override like so
 
-    Deface::Override.new(:virtual_path => "layouts/admin",
+    Deface::Override.new(:virtual_path => "spree/layouts/admin",
                          :name => "tinymce_tag",
                          :insert_bottom => "[data-hook='admin_footer_scripts']",
                          :text => %(
@@ -54,11 +53,13 @@ Seems to be a lot of disagreement about which Rich Text Editor to include, if an
 Testing
 -------
 
+Build status: d'oh!
+
 * shoulda
 * factory_girl
 * Spork
 
-The included spec_helper.rb is configured for use with Spork due to Spree's extended loading time.
+The included test_helper.rb is configured for use with Spork due to Spree's extended loading time.
 
 Following the lead of the Spree development team, all tests have been converted to shoulda from RSpec.
 
