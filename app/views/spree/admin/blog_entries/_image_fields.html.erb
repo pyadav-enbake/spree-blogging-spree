@@ -1,14 +1,13 @@
-    <div class="fields" style="clear: left">
+<tr class="fields">
+    <td id="blog_image_<%= dom_id(f.object) %>">
         <% unless f.object.new_record? %>
-            <div id="blog_image_<%= f.object.id %>" style="float: left; margin: 0 1em 1em 0">
-                <%= image_tag f.object.attachment.url(:mini) %>
-            </div>
-			<script type="text/javascript" charset="utf-8">
-				$('#blog_image_<%= f.object.id %> img').click(function(){
-					$('#blog_entry_body').insertAtCaret("!"+this.src+"!");
-				});
-			</script>
+            <%= image_tag f.object.attachment.url(:mini) %>
         <% end %>
-		<%= f.file_field :attachment %>
+    </td>
+    <td>
+        <%= f.file_field :attachment %>
+    </td>
+    <td>
         <%= link_to_remove_fields t("remove"), f %>
-    </div>
+    </td>
+</tr>

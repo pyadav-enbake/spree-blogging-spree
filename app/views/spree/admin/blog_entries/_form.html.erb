@@ -29,15 +29,16 @@
       <%= t('tag_list_example') %>
     </p>
 
-    <div id="blog_entry_image_fields">
     <%= form.label :attachment, t(:images) %><br/>
-    <%= form.fields_for :images do |f_images| %>
-        <%= render 'image_fields', :f => f_images %>
-    <% end %>
-    </div>
+    <table>
+        <tbody id="blog_entry_image_fields">
+            <%= form.fields_for :images do |f_images| %>
+                <%= render 'image_fields', :f => f_images %>
+            <% end %>
+        </tbody>
+    </table>
 
     <p>
-    <%= link_to_add_fields icon('add') + ' ' + t("add_image"),
-        "div#blog_entry_image_fields", form, :images %>
+    <%= link_to_add_fields t("add_image"), "#blog_entry_image_fields" %>
     </p>
 </div>
